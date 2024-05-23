@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>登入頁面</title>
+        <link rel="stylesheet" href="{{url_for('static_week7',path='style.css')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body >
+        <div class="title">
+            <h1>歡迎光臨，請輸入帳號密碼</h1>
+        </div>
+        <div class="form">
+            <form id='signup-id'class="form-inner" action="/signup" method="post">
+                <h3>註冊帳號</h3> 
+                <div class="inner-box">姓名<input type="text" id='name' name="name" placeholder="Your name"></div>
+                <div class="inner-box">帳號<input type="text" id='username' name="username"placeholder="Username"></div>
+                <div class="inner-box">密碼<input type="password" id='password' name="password"placeholder="Password"></div>
+                <div class="btn"><button type="submit" >註冊</button></div>
+            </form>  
+        </div>
+        <hr class="line">
+        <div class="form">
+            <form id='signin-id'class="form-inner" action="/signin" method="post">
+                <h3>登入系統</h3> 
+                <div class="inner-box">帳號<input type="text" id='username' name="username"placeholder="Username"></div>
+                <div class="inner-box">密碼<input type="password" id='password' name="password"placeholder="Password"></div>
+
+                <div class="btn"><button type="submit" >登入</button></div>
+            </form>  
+        </div>
+        
+
+        <script>
+
+        </script>
+        
+    </body>
+    
+    
+</html>

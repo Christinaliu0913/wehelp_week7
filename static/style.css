@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    box-sizing:border-box;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+} 
+
+.title{
+    height: 40px;
+    background-color: rgb(49, 60, 76);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    
+}
+
+.form-inner{
+    flex: none;
+    
+}
+
+.form-inner h3 {
+    font-size: 16px;
+    text-align: center;
+}
+
+.inner-box{
+    margin:8px;
+    position: relative;
+}
+.inner-box input{
+    margin-left: 10px;
+    height: 30px;
+    border: 1px solid gray;
+    text-indent: 8px;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    margin:8px;
+}
+.btn button{
+    width: 90%;
+    border: 0px solid gray;
+    height: 30px;
+    font-weight: bold;
+    background-color: rgb(122, 149, 193);
+    color: white;
+    margin-bottom: 30px;
+}
+
+.member-notify{
+    flex: none;
+    text-align: center;
+    margin-top: 30px;
+}
+.logout-message{
+    text-align: center;
+}
+.btn-link{
+    border: none;
+    background: none;
+    color: blue;
+    padding: 0;
+    font:inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 30px;
+}
+.line{
+    border-top: 1px solid rgb(207, 207, 207);
+}
+
+.message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.message-block{
+    flex: none;
+}
+
+.inner-query{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.inner-query input{
+    height: 30px;
+}
+.inner-query button{
+    border: 0px solid gray;
+    height: 30px;
+    font-weight: bold;
+    background-color: rgb(122, 149, 193);
+    color: white;
+    margin-left: 10px;
+    border-radius: 3px;
+}

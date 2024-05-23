@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>會員頁面</title>
+        <link rel="stylesheet" type='text/css' href="{{url_for('static_week7',path='style.css')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            
+        </style>
+    </head>
+    <body >
+        <div class="title">
+            <h1>歡迎光臨，這是會員頁</h1>
+        </div>
+        <div class="form">
+            <form id="logoutForm" class="member-notify" action="signout" method="get">
+                <div class="logout-message" id="welcomename"><span>{{name}}</span>，歡迎登入系統</div>
+                <div ><button class="btn-link" type="submit">登出系統</button></div>
+            </form>
+        </div>    
+        <hr class="line">
+        <div class="form">
+            <form class="form-inner" >
+                <h3>查詢會員帳號</h3> 
+                <div class="inner-query">
+                    <input type="text" id="queryUsername" placeholder=" name">
+                    <button class='btn-query' type="button" id="queryButton">查詢</button>
+                </div>
+            </form>  
+        </div>
+        <div class="message">
+            <div class="message-block" id="query-result">{{query_message}}</div>
+        </div>
+        <hr class="line">
+        <div class="form">
+            <form class="form-inner" >
+                <h3>更新我的姓名</h3> 
+                <div class="inner-query">
+                    <input type="text" id="updateName" placeholder=" new name">
+                    <button class='btn-query' type="button" id="updateButton">更新</button>
+                </div>
+            </form>  
+        </div>
+        <div class="message">
+            <div class="message-block" id="update-result">{{update_message}}</div>
+        </div>
+    </body>
+
+    <script>
+        //查詢會員帳號名字
+        document.addEventListener("DOMContentLoaded",function(){
+            document.getElementById("queryButton").addEventListener("click",function(){
+                //獲取輸入會員帳號
+                const username=document.getElementById('queryUsername').value;
+                if(!username){
+                    return;
+                }
+                fetch(`/api/member?username=${encodeURIComponent(username)}`,{
+                    method:"GET",
+                    headers:{
+                        'Accept':"application/json"
+                    }
+                })
+                .then(response => response.json())
+                .then(data=>{
+                    const queryResult=document.getElementById('query-result');
+                    if(data.data !==null){
+                        queryResult.innerHTML=`<p>${data.data.name}(${data.data.username})</p>`;
+                    }else{
+                        queryResult.innerHTML='查無此人'
+                    }
+                }).catch(error=>{
+                    alert('錯誤');
+                });
+            });
+        
+        //更新自己的帳號
+            const newNameInput=document.getElementById('updateName');
+            const updateButton=document.getElementById('updateButton');
+            updateButton.addEventListener('click',function(){
+                const newName=newNameInput.value;
+                if(!newName){
+                    alert('請輸入更新姓名');
+                    return;
+                }
+                fetch(`/api/member`,{
+                    method:"PATCH",
+                    headers:{
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({name:newName})//將新名字轉換為JSON並放在請求中
+                })
+                .then(response => {
+                    if(!response.ok){
+                        throw new Error('更新失敗');
+                    }
+                    return response.json();
+                })
+                .then(data=>{
+                    const updateResult=document.getElementById('update-result');
+                    if(data.ok){
+                        updateResult.innerHTML = `<p>更新成功</p>`;
+                        const welcomename=document.getElementById('welcomename');
+                        welcomename.textContent=`${newName}，歡迎登入系統`;
+                    }else{
+                        updateResult.innerHTML=`<p>更新失敗</p>`;
+                    }
+                })
+                .catch(error=>{
+                    console.error("錯誤",error.message);
+                })
+            })
+        });
+    </script>
+    
+</html>
